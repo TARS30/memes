@@ -6,10 +6,13 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 100vh;
+  padding-top: 1rem;
+  padding-left: 1rem;
 `;
 
 export default function CreateMeme() {
-  const { register, reset, handleSubmit, getValues, formState } = useForm();
+  const { register, reset, handleSubmit } = useForm();
 
   const { isCreating, createMeme } = useCreateMeme();
 
@@ -20,7 +23,6 @@ export default function CreateMeme() {
       { ...data, image: image },
       {
         onSuccess: () => {
-          console.log("success");
           reset();
         },
       }
@@ -30,6 +32,7 @@ export default function CreateMeme() {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <input
+        disabled={isCreating}
         type="text"
         placeholder="meme name"
         id="name"
@@ -38,6 +41,7 @@ export default function CreateMeme() {
         })}
       />
       <input
+        disabled={isCreating}
         type="text"
         placeholder="description of meme"
         id="description"
@@ -46,6 +50,7 @@ export default function CreateMeme() {
         })}
       />
       <input
+        disabled={isCreating}
         type="file"
         id="image"
         accept="image/*"
@@ -53,7 +58,9 @@ export default function CreateMeme() {
           required: "This field is required",
         })}
       />
-      <button type="submit">submit</button>
+      <button disabled={isCreating} type="submit">
+        submit
+      </button>
     </StyledForm>
   );
 }

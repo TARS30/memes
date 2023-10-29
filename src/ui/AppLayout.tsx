@@ -8,18 +8,21 @@ import { Outlet } from "react-router-dom";
 const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr;
-  height: 100vh;
-  width: 100vw;
-  @media(max-width: 500px) {
+  width: 100%;
+  height: 100%;
+  @media (max-width: 500px) {
     grid-template-columns: 6rem 1fr;
-
   }
+  `;
+const StyledAppLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 `;
-
 export default function AppLayout() {
-
-return (
-    <>
+  return (
+    <StyledAppLayout>
       <Header />
       <StyledDiv>
         <Sidebar />
@@ -27,6 +30,6 @@ return (
           <Outlet />
         </Main>
       </StyledDiv>
-    </>
+    </StyledAppLayout>
   );
 }

@@ -1,6 +1,6 @@
 import { useMeme } from "./useMeme";
 import { useMemes } from "./useMemes";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BsChevronCompactRight, BsChevronCompactLeft } from "react-icons/bs";
 
 import Comment from "../Comment";
@@ -31,6 +31,15 @@ const CommentsBlock = styled.ul`
   max-width: 500px;
   margin: 1rem auto;
 `;
+const StyledDiv = styled.div`
+width: 100%;
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+padding: 1rem 1rem;
+`
 
 export default function Meme() {
   const searchParams = useParams();
@@ -43,7 +52,7 @@ export default function Meme() {
   const newArrayReverse = newArray.reverse();
 
   if (isLoading) {
-    return <p>loading</p>;
+    return <StyledDiv>loading</StyledDiv>;
   }
   if (error) {
     throw new Error("meme not found");
@@ -74,7 +83,7 @@ export default function Meme() {
         icon={<BsChevronCompactLeft />}
         onClick={() => prevMemeHandler()}
       />
-      <div>
+      <StyledDiv>
         <StyledTitle>{name || "qwe"}</StyledTitle>
         <ImageContainer>
           <StyledImg src={image || "asd"} alt="meme" />
@@ -90,7 +99,7 @@ export default function Meme() {
             placeholder={"placeholder"}
           />
         </CommentsBlock>
-      </div>
+      </StyledDiv>
       <FullScreenButton
         disabled={currentMemeParams === lastMemeId}
         onClick={() => nextMemeHandler()}
