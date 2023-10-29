@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr;
+  height: 100vh;
 `;
 
 export default function AppLayout() {

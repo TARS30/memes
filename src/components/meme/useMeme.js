@@ -1,10 +1,8 @@
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getMeme } from "../../services/apiMemes";
 
-export const useMeme = () => {
-  const { memeId } = useParams();
-  
+
+export const useMeme = (memeId) => {
   const {
     isLoading,
     data: meme,

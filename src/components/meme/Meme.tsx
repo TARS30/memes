@@ -1,13 +1,12 @@
 import { useMeme } from "./useMeme";
-import { BsChevronCompactRight } from "react-icons/bs";
-import { BsChevronCompactLeft } from "react-icons/bs";
-import FullScreenButton from "../../ui/FullScreenButton";
+import { useMemes } from "./useMemes";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { BsChevronCompactRight, BsChevronCompactLeft } from "react-icons/bs";
 
 import Comment from "../Comment";
 import Input from "../../ui/Input";
 import styled from "styled-components";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useMemes } from "./useMemes";
+import FullScreenButton from "../../ui/FullScreenButton";
 
 const ImageContainer = styled.div`
   display: flex;
@@ -34,58 +33,52 @@ const CommentsBlock = styled.ul`
 `;
 
 export default function Meme() {
+  const searchParams = useParams();
+  const { meme, isLoading, error } = useMeme(searchParams.memeId);
   const memes = useMemes();
-  const params = useParams();
   const navigate = useNavigate();
-  const { meme, isLoading, error } = useMeme();
 
-  const firstMeme = memes.memes?.at(0);
+  const newArray = [...(memes.memes ?? [])];
 
-  const currentMeme = memes.memes?.at(Number(params.memeId) - 1);
-
-  const nextMeme = () => {
-    memes.memes?.at(Number(params.memeId) + 1);
-    navigate(`/memes/${Number(params?.memeId) + 1}`);
-  };
-  const prevMeme = () => {
-    memes.memes?.at(Number(params.memeId) - 1);
-    navigate(`/memes/${Number(params?.memeId) - 1}`);
-  };
-
-  const memesQuantity = Number(memes.memes?.length) - 1;
-  const lastMeme = memes.memes?.at(-1);
-
-  if (error) {
-    throw new Error("meme not found");
-  }
-
-  const currentMemeId = Number(params.memeId);
+  const newArrayReverse = newArray.reverse();
 
   if (isLoading) {
     return <p>loading</p>;
   }
+  if (error) {
+    throw new Error("meme not found");
+  }
 
-  const { name, description, image } = currentMeme;
+  const { name, description, image } = meme;
+
+  const lastMemeId = memes.memes?.at(-1).id;
+
+  const currentMemeParams = Number(searchParams.memeId);
+
+  const nextMemeId = memes.memes?.find(({ id }) => id > currentMemeParams);
+
+  const prevMemeId = newArrayReverse?.find(({ id }) => id < currentMemeParams);
+
+  const nextMemeHandler = () => {
+    navigate(`/memes/${nextMemeId.id}`);
+  };
 
   const prevMemeHandler = () => {
-    prevMeme();
-  };
-  const nextMemeHandler = () => {
-    nextMeme();
+    navigate(`/memes/${prevMemeId.id}`);
   };
 
   return (
     <>
       <FullScreenButton
-        disabled={currentMemeId === 1}
+        disabled={currentMemeParams === 1}
         icon={<BsChevronCompactLeft />}
         onClick={() => prevMemeHandler()}
       />
       <div>
-        <StyledTitle>{name}</StyledTitle>
+        <StyledTitle>{name || "qwe"}</StyledTitle>
         <ImageContainer>
-          <StyledImg src={image} alt="meme" />
-          <p>{description}</p>
+          <StyledImg src={image || "asd"} alt="meme" />
+          <p>{description || "qwe"}</p>
         </ImageContainer>
         <CommentsBlock>
           <Comment comment="text of comment" />
@@ -99,7 +92,7 @@ export default function Meme() {
         </CommentsBlock>
       </div>
       <FullScreenButton
-        disabled={currentMemeId === memesQuantity}
+        disabled={currentMemeParams === lastMemeId}
         onClick={() => nextMemeHandler()}
         icon={<BsChevronCompactRight />}
       />

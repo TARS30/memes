@@ -1,20 +1,26 @@
 import { useForm } from "react-hook-form";
 import { useCreateMeme } from "./useCreateMeme";
+import styled from "styled-components";
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
 
 export default function CreateMeme() {
-
   const { register, reset, handleSubmit, getValues, formState } = useForm();
 
   const { isCreating, createMeme } = useCreateMeme();
 
-  const onSubmit = (data:any) => {
+  const onSubmit = (data: any) => {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
     createMeme(
       { ...data, image: image },
       {
         onSuccess: () => {
-          console.log('success')
+          console.log("success");
           reset();
         },
       }
@@ -22,7 +28,7 @@ export default function CreateMeme() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
         placeholder="meme name"
@@ -40,7 +46,7 @@ export default function CreateMeme() {
         })}
       />
       <input
-      type="file"
+        type="file"
         id="image"
         accept="image/*"
         {...register("image", {
@@ -48,6 +54,6 @@ export default function CreateMeme() {
         })}
       />
       <button type="submit">submit</button>
-    </form>
+    </StyledForm>
   );
 }
