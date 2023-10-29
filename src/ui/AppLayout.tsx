@@ -9,6 +9,10 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr;
   height: 100vh;
+  @media(max-width: 500px) {
+    grid-template-columns: 6rem 1fr;
+
+  }
 `;
 
 export default function AppLayout() {
