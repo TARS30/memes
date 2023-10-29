@@ -32,9 +32,6 @@ const CommentsBlock = styled.ul`
   max-width: 500px;
   margin: 1rem auto;
 `;
-// export interface MemeProps {
-//   meme: any;
-// }
 
 export default function Meme() {
   const memes = useMemes();
@@ -42,9 +39,9 @@ export default function Meme() {
   const navigate = useNavigate();
   const { meme, isLoading, error } = useMeme();
 
-  const currentMeme = memes.memes?.at(Number(params.memeId) - 1);
+  const firstMeme = memes.memes?.at(0);
 
-  
+  const currentMeme = memes.memes?.at(Number(params.memeId) - 1);
 
   const nextMeme = () => {
     memes.memes?.at(Number(params.memeId) + 1);
@@ -57,8 +54,7 @@ export default function Meme() {
 
   const memesQuantity = Number(memes.memes?.length) - 1;
   const lastMeme = memes.memes?.at(-1);
-  
-  // console.log(lastMeme)
+
   if (error) {
     throw new Error("meme not found");
   }
@@ -69,24 +65,13 @@ export default function Meme() {
     return <p>loading</p>;
   }
 
-  const { id, name, description, image } = currentMeme;
-
-  // const { id, name, description, image } = meme;
+  const { name, description, image } = currentMeme;
 
   const prevMemeHandler = () => {
-    // if (currentMemeId === 1) {
-    //   return;
-    // }
-    // navigate(`/memes/${id - 1}`);
     prevMeme();
   };
   const nextMemeHandler = () => {
-    // if (currentMemeId === memesQuantity) {
-    //   return;
-    // }
-    // navigate(`/memes/${id + 1}`);
     nextMeme();
-
   };
 
   return (
