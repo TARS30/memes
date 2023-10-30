@@ -1,11 +1,41 @@
+import { BsList } from "react-icons/bs";
 import styled from "styled-components";
+import { menuOpen } from "./Sidebar";
 
 const StyledHeader = styled.header`
-  padding: 0.5rem 0;
-  text-align: center;
-  background: #777;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+  background: #0f7f83a4;
+`;
+
+const StyledHeaderButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 3px;
+  color: #363636;
+  transition: all 0.2s ease 0s;
+  &:active {
+    background-color: #0a5658a3;
+    color: #525252;
+  }
+  @media (min-width: 500px) {
+    display: none;
+  }
 `;
 
 export default function Header() {
-  return <StyledHeader>Header</StyledHeader>;
+  return (
+    <StyledHeader>
+      <StyledHeaderButton onClick={() => menuOpen()}>
+        <BsList />
+      </StyledHeaderButton>
+      <h3>Header</h3>
+    </StyledHeader>
+  );
 }

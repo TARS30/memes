@@ -9,9 +9,11 @@ const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr;
   width: 100%;
+  overflow: hidden;
   height: 100%;
   @media (max-width: 500px) {
-    grid-template-columns: 6rem 1fr;
+    display: flex;
+    flex-direction:column;
   }
   `;
 const StyledAppLayout = styled.div`

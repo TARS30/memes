@@ -4,6 +4,7 @@ import styled from "styled-components";
 export interface LinkProps {
   to: string;
   addressName: string;
+  onClick: any;
 }
 
 const StyledNavLink = styled(NavLink)`
@@ -14,6 +15,10 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-export default function Link({ to, addressName }: LinkProps) {
-  return <StyledNavLink to={to}>{addressName}</StyledNavLink>;
+export default function Link({ onClick, to, addressName }: LinkProps) {
+  return (
+    <div onClick={onClick}>
+      <StyledNavLink to={to}>{addressName}</StyledNavLink>
+    </div>
+  );
 }
