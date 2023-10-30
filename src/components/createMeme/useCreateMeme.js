@@ -8,6 +8,7 @@ export const useCreateMeme = () => {
 
   const { mutate: createMeme, isLoading: isCreating } = useMutation({
     mutationFn: createEditMeme,
+    
     onSuccess: () => {
       toast.success("new meme created");
       queryClient.invalidateQueries({ queryKey: ["meme"] });

@@ -7,6 +7,9 @@ import Comment from "../Comment";
 import Input from "../../ui/Input";
 import styled from "styled-components";
 import FullScreenButton from "../../ui/FullScreenButton";
+import Spinner from "../../ui/Spinner";
+import ErrorPage from "../../ui/ErrorPage";
+import { useMoveBack } from "../../hooks/useMoveBack";
 
 const ImageContainer = styled.div`
   display: flex;
@@ -32,38 +35,82 @@ const CommentsBlock = styled.ul`
   margin: 1rem auto;
 `;
 const StyledDiv = styled.div`
-width: 100%;
-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: center;
-padding: 1rem 1rem;
-`
-
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 1rem;
+`;
+const FlexDiv = styled.div`
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+const WideDiv = styled.div`
+  width: 100%;
+`;
 export default function Meme() {
   const searchParams = useParams();
   const { meme, isLoading, error } = useMeme(searchParams.memeId);
   const memes = useMemes();
   const navigate = useNavigate();
 
-
   const newArray = [...(memes.memes ?? [])];
 
   const newArrayReverse = newArray.reverse();
 
+  const moveBack = useMoveBack();
+
   if (isLoading) {
-    return <StyledDiv>loading</StyledDiv>;
+    return (
+      <WideDiv>
+        <FlexDiv>
+          <FullScreenButton
+            disabled={true}
+            icon={<BsChevronCompactLeft />}
+            onClick={() => prevMemeHandler()}
+          />
+          <WideDiv>
+            <Spinner />
+          </WideDiv>
+          <FullScreenButton
+            disabled={true}
+            onClick={() => nextMemeHandler()}
+            icon={<BsChevronCompactRight />}
+          />
+        </FlexDiv>
+      </WideDiv>
+    );
   }
   if (error) {
-    throw new Error("meme not found");
+    return (
+      <WideDiv>
+        <FlexDiv>
+          <FullScreenButton
+            disabled={true}
+            icon={<BsChevronCompactLeft />}
+            onClick={() => prevMemeHandler()}
+          />
+          <WideDiv>
+            <ErrorPage message={error.message} />
+            <button onClick={moveBack}>Move Back</button>
+          </WideDiv>
+          <FullScreenButton
+            disabled={true}
+            onClick={() => nextMemeHandler()}
+            icon={<BsChevronCompactRight />}
+          />
+        </FlexDiv>
+      </WideDiv>
+    );
   }
 
   const { name, description, image } = meme;
 
-
   const lastMemeId = memes.memes?.at(-1).id;
-
+  const firstMemeId = memes.memes?.at(0).id;
   const currentMemeParams = Number(searchParams.memeId);
 
   const nextMemeId = memes.memes?.find(({ id }) => id > currentMemeParams);
@@ -81,19 +128,18 @@ export default function Meme() {
   return (
     <>
       <FullScreenButton
-        disabled={currentMemeParams === 1}
+        disabled={currentMemeParams === firstMemeId}
         icon={<BsChevronCompactLeft />}
         onClick={() => prevMemeHandler()}
       />
+
       <StyledDiv>
-        <StyledTitle>{name || "qwe"}</StyledTitle>
+        <StyledTitle>{name}</StyledTitle>
         <ImageContainer>
-          <StyledImg src={image || "asd"} alt="meme" />
-          <p>{description || "qwe"}</p>
+          <StyledImg src={image} alt="meme" />
+          <p>{description}</p>
         </ImageContainer>
         <CommentsBlock>
-          <Comment comment="text of comment" />
-          <Comment comment="text of comment text of comment text of comment" />
           <Comment comment="text of comment" />
           <Input
             label="Write new comment"
@@ -102,6 +148,7 @@ export default function Meme() {
           />
         </CommentsBlock>
       </StyledDiv>
+
       <FullScreenButton
         disabled={currentMemeParams === lastMemeId}
         onClick={() => nextMemeHandler()}

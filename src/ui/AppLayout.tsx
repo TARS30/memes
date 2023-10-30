@@ -13,9 +13,9 @@ const StyledDiv = styled.div`
   height: 100%;
   @media (max-width: 500px) {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
   }
-  `;
+`;
 const StyledAppLayout = styled.div`
   display: flex;
   flex-direction: column;

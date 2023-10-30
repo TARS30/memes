@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateMeme } from "./useCreateMeme";
+
 import styled from "styled-components";
+import SpinnerMini from "../../ui/SpinnerMini";
 import FIleInput from "../../ui/fIleInput/FIleInput";
 
 const StyledForm = styled.form`
@@ -18,12 +21,16 @@ const StyledForm = styled.form`
 `;
 
 const StyledButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.75rem 0.5rem;
   border: none;
   border-radius: 3px;
   transition: all 0.3s ease 0s;
   background-color: #1bbc9b;
   color: #fff;
+  gap: 10px;
   &:hover {
     background-color: #169b80;
   }
@@ -35,26 +42,28 @@ const StyledButton = styled.button`
 
 export default function CreateMeme() {
   const { register, reset, handleSubmit } = useForm();
+  const [isCreating, setIsCreating] = useState(false);
+  const { createMeme } = useCreateMeme();
 
-  const { isCreating, createMeme } = useCreateMeme();
-  
   const onSubmit = (data: any) => {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    
+    setIsCreating(true);
+
     createMeme(
       { ...data, image: image },
       {
         onSuccess: () => {
           reset();
+          setIsCreating(false);
         },
       }
-      );
-    };
-    const registerImageFunc = {
-      ...register("image", {
-        required: "This field is required",
-      }),
-    };
+    );
+  };
+  const registerImageFunc = {
+    ...register("image", {
+      required: "This field is required",
+    }),
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -77,15 +86,6 @@ export default function CreateMeme() {
           required: "This field is required",
         })}
       />
-      {/* <input
-        disabled={isCreating}
-        type="file"
-        id="image"
-        accept="image/*"
-        {...register("image", {
-          required: "This field is required",
-        })}
-      /> */}
 
       <FIleInput
         type="file"
@@ -96,8 +96,10 @@ export default function CreateMeme() {
       />
 
       <StyledButton disabled={isCreating} type="submit">
-        submit
+        <span>submit</span>
+        {isCreating ? <SpinnerMini /> : null}
       </StyledButton>
     </StyledForm>
   );
 }
+//починить isCreating!
