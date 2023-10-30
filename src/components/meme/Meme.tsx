@@ -47,6 +47,7 @@ export default function Meme() {
   const memes = useMemes();
   const navigate = useNavigate();
 
+
   const newArray = [...(memes.memes ?? [])];
 
   const newArrayReverse = newArray.reverse();
@@ -59,6 +60,7 @@ export default function Meme() {
   }
 
   const { name, description, image } = meme;
+
 
   const lastMemeId = memes.memes?.at(-1).id;
 

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Link from "../ui/Link";
+
 import { BsXCircle } from "react-icons/bs";
+import { useMemes } from "./meme/useMemes";
 
 const StyledSidebarButton = styled.button`
   background: none;
@@ -60,7 +62,7 @@ const StyledDarkside = styled.div`
   position: absolute;
   background-color: #000000a0;
   transition: all 0.3s ease 0s;
-  overflow:hidden;
+  overflow: hidden;
   .menu-open & {
     right: -20%;
     display: block;
@@ -88,6 +90,8 @@ export function menuClose() {
 }
 
 export default function Sidebar() {
+  const memes = useMemes();
+  const firstMemeId = memes.memes?.at(0).id;
   return (
     <>
       <StyledSidebar>
@@ -95,7 +99,11 @@ export default function Sidebar() {
           <BsXCircle />
         </StyledSidebarButton>
         <Link onClick={() => menuClose()} to="/" addressName="Home" />
-        <Link onClick={() => menuClose()} to="/memes/1" addressName="memes" />
+        <Link
+          onClick={() => menuClose()}
+          to={`memes/${firstMemeId}`}
+          addressName="memes"
+        />
         <Link
           onClick={() => menuClose()}
           to="/create-meme"
