@@ -16,6 +16,7 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const StyledTitle = styled.h2`
@@ -36,12 +37,11 @@ const CommentsBlock = styled.ul`
 `;
 const StyledDiv = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   padding: 1rem 1rem;
+  gap: 1.5rem;
 `;
 const FlexDiv = styled.div`
   flex: 1 1 100%;
@@ -50,6 +50,15 @@ const FlexDiv = styled.div`
 `;
 const WideDiv = styled.div`
   width: 100%;
+`;
+const StyledDate = styled.p`
+  margin-left: auto;
+  font-size: 15px;
+  font-weight: 600;
+  & span {
+    font-size: 10px;
+    font-weight: 300;
+  }
 `;
 export default function Meme() {
   const searchParams = useParams();
@@ -107,8 +116,10 @@ export default function Meme() {
     );
   }
 
-  const { name, description, image } = meme;
-
+  const { name, author, created_at, description, image } = meme;
+  
+  const formateDate = created_at.split("T")[0];
+  const formateTime = created_at.split("T")[1].split(".")[0];
   const lastMemeId = memes.memes?.at(-1).id;
   const firstMemeId = memes.memes?.at(0).id;
   const currentMemeParams = Number(searchParams.memeId);
@@ -139,14 +150,23 @@ export default function Meme() {
           <StyledImg src={image} alt="meme" />
           <p>{description}</p>
         </ImageContainer>
-        <CommentsBlock>
+        <StyledDate>
+          Posted at:
+          <span>
+            {" "}
+            {formateDate} {formateTime}
+          </span>
+          <br/>
+          By: {author}
+        </StyledDate>
+        {/* <CommentsBlock>
           <Comment comment="text of comment" />
           <Input
             label="Write new comment"
             type={"text"}
             placeholder={"placeholder"}
           />
-        </CommentsBlock>
+        </CommentsBlock> */}
       </StyledDiv>
 
       <FullScreenButton

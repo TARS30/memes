@@ -29,7 +29,6 @@ const StyledSidebar = styled.aside`
   position: relative;
   gap: 20px;
   display: flex;
-  flex: 1 0 auto;
   flex-direction: column;
   background-color: #cecece;
   padding-top: 1rem;
@@ -40,7 +39,7 @@ const StyledSidebar = styled.aside`
     top: 0;
     left: -100%;
     width: 85%;
-    height: 100vh;
+    height: 100%;
     z-index: 10;
     justify-content: center;
     align-items: flex-end;
@@ -102,7 +101,7 @@ export default function Sidebar() {
         <Link
           onClick={() => menuClose()}
           to={`memes/${firstMemeId}`}
-          addressName="memes"
+          addressName="Memes"
         />
         <Link
           onClick={() => menuClose()}

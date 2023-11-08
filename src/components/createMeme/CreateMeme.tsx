@@ -42,7 +42,7 @@ const StyledButton = styled.button`
 
 export default function CreateMeme() {
   const { register, reset, handleSubmit } = useForm();
-  const [isCreating, setIsCreating] = useState(false);
+  const [ isCreating, setIsCreating ] = useState(false);
   const { createMeme } = useCreateMeme();
 
   const onSubmit = (data: any) => {
@@ -86,7 +86,15 @@ export default function CreateMeme() {
           required: "This field is required",
         })}
       />
-
+      <input
+        disabled={isCreating}
+        type="text"
+        placeholder="your name (not necessary)"
+        id="author"
+        {...register("author", {
+          required: "This field is not required",
+        })}
+      />
       <FIleInput
         type="file"
         id="image"
@@ -102,4 +110,3 @@ export default function CreateMeme() {
     </StyledForm>
   );
 }
-//починить isCreating!
