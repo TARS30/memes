@@ -17,6 +17,7 @@ function App() {
       },
     },
   });
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -55,12 +56,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <Route
-  path="/home"
-  element={memes?.map((meme) => (
-    <Meme isLoading={isLoading} meme={meme} key={meme.id} />
-  ))}
-/> */
-}

@@ -3,13 +3,12 @@ import { useMemes } from "./useMemes";
 import { useNavigate, useParams } from "react-router-dom";
 import { BsChevronCompactRight, BsChevronCompactLeft } from "react-icons/bs";
 
-import Comment from "../Comment";
-import Input from "../../ui/Input";
+// import Comment from "../Comment";
+// import Input from "../../ui/Input";
 import styled from "styled-components";
-import FullScreenButton from "../../ui/FullScreenButton";
 import Spinner from "../../ui/Spinner";
 import ErrorPage from "../../ui/ErrorPage";
-import { useMoveBack } from "../../hooks/useMoveBack";
+import FullScreenButton from "../../ui/FullScreenButton";
 
 const ImageContainer = styled.div`
   display: flex;
@@ -27,14 +26,15 @@ const StyledImg = styled.img`
   max-width: 60%;
 `;
 
-const CommentsBlock = styled.ul`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 1rem auto;
-`;
+// const CommentsBlock = styled.ul`
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+//   gap: 1rem;
+//   max-width: 500px;
+//   margin: 1rem auto;
+// `;
+
 const StyledDiv = styled.div`
   width: 100%;
   display: flex;
@@ -60,17 +60,20 @@ const StyledDate = styled.p`
     font-weight: 300;
   }
 `;
+
 export default function Meme() {
   const searchParams = useParams();
+
   const { meme, isLoading, error } = useMeme(searchParams.memeId);
+
   const memes = useMemes();
+  
   const navigate = useNavigate();
 
   const newArray = [...(memes.memes ?? [])];
 
   const newArrayReverse = newArray.reverse();
 
-  const moveBack = useMoveBack();
 
   if (isLoading) {
     return (
@@ -104,7 +107,7 @@ export default function Meme() {
           />
           <WideDiv>
             <ErrorPage message={error.message} />
-            <button onClick={moveBack}>Move Back</button>
+            
           </WideDiv>
           <FullScreenButton
             disabled={true}
@@ -120,8 +123,10 @@ export default function Meme() {
   
   const formateDate = created_at.split("T")[0];
   const formateTime = created_at.split("T")[1].split(".")[0];
+
   const lastMemeId = memes.memes?.at(-1).id;
   const firstMemeId = memes.memes?.at(0).id;
+
   const currentMemeParams = Number(searchParams.memeId);
 
   const nextMemeId = memes.memes?.find(({ id }) => id > currentMemeParams);

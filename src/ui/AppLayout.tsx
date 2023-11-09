@@ -8,9 +8,8 @@ import { Outlet } from "react-router-dom";
 const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr;
-  width: 100%;
   overflow: hidden;
-  height: 100%;
+  width: 100%;
   @media (max-width: 500px) {
     display: flex;
     flex-direction: column;
@@ -19,7 +18,11 @@ const StyledDiv = styled.div`
 const StyledAppLayout = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 100%; */
+  align-items: center;
+  max-width: 1000px;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
 `;
 export default function AppLayout() {
   return (

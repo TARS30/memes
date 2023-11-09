@@ -1,4 +1,3 @@
-// import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 export interface FullScreenButtonProps {
@@ -28,11 +27,6 @@ const StyledButton = styled.button`
   }
 `;
 export default function FullScreenButton({disabled,onClick ,icon }: FullScreenButtonProps) {
-  // const params = useParams().memeId?.toLocaleString();
-
-  // console.log(params);
-
-  // const navigate = useNavigate();
 
   return (
     <ButtonContainer>

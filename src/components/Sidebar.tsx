@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Link from "../ui/Link";
+import styled from "styled-components";
 
 import { BsXCircle } from "react-icons/bs";
 import { useMemes } from "./meme/useMemes";
@@ -89,8 +89,10 @@ export function menuClose() {
 }
 
 export default function Sidebar() {
+
   const memes = useMemes();
   const firstMemeId = memes.memes?.at(0).id;
+
   return (
     <>
       <StyledSidebar>

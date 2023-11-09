@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMeme } from "../../services/apiMemes";
 
-
 export const useMeme = (memeId) => {
   const {
     isLoading,

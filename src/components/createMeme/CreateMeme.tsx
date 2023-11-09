@@ -47,6 +47,7 @@ export default function CreateMeme() {
 
   const onSubmit = (data: any) => {
     const image = typeof data.image === "string" ? data.image : data.image[0];
+    
     setIsCreating(true);
 
     createMeme(
@@ -59,6 +60,7 @@ export default function CreateMeme() {
       }
     );
   };
+
   const registerImageFunc = {
     ...register("image", {
       required: "This field is required",

@@ -1,6 +1,7 @@
 import { BsList } from "react-icons/bs";
-import styled from "styled-components";
 import { menuOpen } from "./Sidebar";
+
+import styled from "styled-components";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -8,6 +9,7 @@ const StyledHeader = styled.header`
   align-items: center;
   padding: 0.5rem 0.5rem;
   background: #0f7f83a4;
+  width: 100%;
 `;
 
 const StyledHeaderButton = styled.div`
