@@ -30,7 +30,7 @@
 
 .input__file_button_text {
   line-height: 1;
-  margin-top: 1px;
+  margin: auto 0.5rem;
 }
 
 .input__file_button {

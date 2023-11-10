@@ -6,6 +6,5 @@ const StyledHome = styled.div`
 `;
 
 export default function Home() {
-
-  return <StyledHome>тут пока нихуя</StyledHome>;
+  return <StyledHome>тут моя фантазия закончилась ☹</StyledHome>;
 }

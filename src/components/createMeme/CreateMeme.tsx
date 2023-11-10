@@ -10,9 +10,10 @@ const StyledForm = styled.form`
   flex: 0 1 17rem;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  margin: 0 auto;
+  gap: 0.75rem;
   height: 100vh;
-  padding: 1rem;
+  padding: 2.5rem 1rem 1rem 1rem;
   & input {
     border-radius: 3px;
     border: none;
@@ -42,12 +43,12 @@ const StyledButton = styled.button`
 
 export default function CreateMeme() {
   const { register, reset, handleSubmit } = useForm();
-  const [ isCreating, setIsCreating ] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
   const { createMeme } = useCreateMeme();
 
   const onSubmit = (data: any) => {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    
+
     setIsCreating(true);
 
     createMeme(
@@ -75,27 +76,18 @@ export default function CreateMeme() {
         type="text"
         placeholder="meme name"
         id="name"
-        {...register("name", {
-          required: "This field is required",
-        })}
       />
       <input
         disabled={isCreating}
         type="text"
         placeholder="description of meme"
         id="description"
-        {...register("description", {
-          required: "This field is required",
-        })}
       />
       <input
         disabled={isCreating}
         type="text"
         placeholder="your name (not necessary)"
         id="author"
-        {...register("author", {
-          required: "This field is not required",
-        })}
       />
       <FIleInput
         type="file"
@@ -106,7 +98,7 @@ export default function CreateMeme() {
       />
 
       <StyledButton disabled={isCreating} type="submit">
-        <span>submit</span>
+        <span>Submit</span>
         {isCreating ? <SpinnerMini /> : null}
       </StyledButton>
     </StyledForm>

@@ -25,9 +25,16 @@ const StyledButton = styled.button`
     background-color: #72727244;
     transition: all 0.1s ease 0s;
   }
+  &:disabled:hover {
+    cursor: not-allowed;
+    background-color: #cccccc44;
+  }
 `;
-export default function FullScreenButton({disabled,onClick ,icon }: FullScreenButtonProps) {
-
+export default function FullScreenButton({
+  disabled,
+  onClick,
+  icon,
+}: FullScreenButtonProps) {
   return (
     <ButtonContainer>
       <StyledButton disabled={disabled} onClick={() => onClick()}>

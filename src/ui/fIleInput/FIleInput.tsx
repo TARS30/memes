@@ -31,7 +31,7 @@ export default function FIleInput({
         <span className={styles.input__file_icon_wrapper}>
           <HiArrowDownOnSquare />
         </span>
-        <span className={styles.input__file_button_text}>Выберите файл</span>
+        <span className={styles.input__file_button_text}>Choose meme</span>
       </label>
     </div>
   );

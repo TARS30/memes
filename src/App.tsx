@@ -1,7 +1,7 @@
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import AppLayout from "./ui/AppLayout";
@@ -26,8 +26,8 @@ function App() {
           <Routes>
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="/home" />} />
-              <Route path="memes/:memeId" element={<Meme />} />
               <Route path="home" element={<Home />} />
+              <Route path="memes/:memeId" element={<Meme />} />
               <Route path="create-meme" element={<CreateMeme />} />
             </Route>
           </Routes>
