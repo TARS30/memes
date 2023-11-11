@@ -5,24 +5,22 @@ import Sidebar from "../components/Sidebar";
 
 import { Outlet } from "react-router-dom";
 
-const StyledDiv = styled.div`
-  display: grid;
-  grid-template-columns: 10rem 1fr;
-  overflow: hidden;
-  width: 100%;
-  @media (max-width: 500px) {
-    display: flex;
-    flex-direction: column;
-  }
-`;
 const StyledAppLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 1000px;
-  height: 100vh;
   overflow: hidden;
   margin: 0 auto;
+`;
+const StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  width: 100%;
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export default function AppLayout() {
   return (

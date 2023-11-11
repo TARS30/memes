@@ -5,7 +5,7 @@ const StyledMain = styled.main`
   background-color: #eeeeee;
   display: flex;
   justify-content: space-between;
-  max-height: 100%;
+  min-height: 100%;
 `;
 
 export interface MainProps {
