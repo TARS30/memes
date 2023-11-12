@@ -76,18 +76,21 @@ export default function CreateMeme() {
         type="text"
         placeholder="meme name"
         id="name"
-      />
+         {...register("name")}
+         />
       <input
         disabled={isCreating}
         type="text"
         placeholder="description of meme"
         id="description"
-      />
+        {...register("description")}
+        />
       <input
         disabled={isCreating}
         type="text"
         placeholder="your name (not necessary)"
         id="author"
+        {...register("author")}
       />
       <FIleInput
         type="file"

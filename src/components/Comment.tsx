@@ -1,17 +1,28 @@
 import styled from "styled-components";
+import Input from "../ui/Input";
 
 const StyledComment = styled.li`
-  border: 1px solid #ffffff;
+  border: 1px solid #000000;
   flex: 1 1 auto;
-  color: #ffffff;
+  color: #000000;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 `;
 
 export interface CommentProps {
-  comment: string;
+  comments: string;
 }
 
-export default function Comment({ comment }: CommentProps) {
-  return <StyledComment>{comment}</StyledComment>;
+export default function Comment({ comments }: CommentProps) {
+  return (
+    <>
+      <StyledComment>{comments}</StyledComment>{" "}
+      <Input
+        label="Write new comment"
+        type={"text"}
+        placeholder={"placeholder"}
+      />
+      return{" "}
+    </>
+  );
 }

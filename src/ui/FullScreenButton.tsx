@@ -7,7 +7,7 @@ export interface FullScreenButtonProps {
 }
 
 const ButtonContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const StyledButton = styled.button`

@@ -12,11 +12,13 @@ const StyledAppLayout = styled.div`
   max-width: 1000px;
   overflow: hidden;
   margin: 0 auto;
-`;
+  min-height: 100vh;
+  `;
 const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr;
-  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
   @media (max-width: 500px) {
     display: flex;
     flex-direction: column;

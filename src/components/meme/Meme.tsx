@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BsChevronCompactRight, BsChevronCompactLeft } from "react-icons/bs";
 
 // import Comment from "../Comment";
-// import Input from "../../ui/Input";
 import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import ErrorPage from "../../ui/ErrorPage";
@@ -17,24 +16,20 @@ const ImageContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 `;
-
 const StyledTitle = styled.h2`
   text-align: center;
 `;
-
 const StyledImg = styled.img`
   max-width: 60%;
 `;
-
 // const CommentsBlock = styled.ul`
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-//   gap: 1rem;
-//   max-width: 500px;
-//   margin: 1rem auto;
-// `;
-
+//    display: flex;
+//    align-items: center;
+//    flex-direction: column;
+//    gap: 1rem;
+//    max-width: 500px;
+//    margin: 1rem auto;
+//  `;
 const StyledDiv = styled.div`
   width: 100%;
   display: flex;
@@ -73,7 +68,6 @@ export default function Meme() {
   const newArray = [...(memes.memes ?? [])];
 
   const newArrayReverse = newArray.reverse();
-
 
   if (isLoading) {
     return (
@@ -165,12 +159,8 @@ export default function Meme() {
           By: {author}
         </StyledDate>
         {/* <CommentsBlock>
-          <Comment comment="text of comment" />
-          <Input
-            label="Write new comment"
-            type={"text"}
-            placeholder={"placeholder"}
-          />
+          <Comment comments={'comment'}/>
+         
         </CommentsBlock> */}
       </StyledDiv>
 

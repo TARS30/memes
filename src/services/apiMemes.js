@@ -1,6 +1,5 @@
 import supabase, { supabaseUrl } from "./supabase";
 
-
 export async function getMemes() {
   const { data, error } = await supabase.from("memes").select("*");
 
@@ -8,8 +7,7 @@ export async function getMemes() {
     console.error(error);
     throw new Error("memes could not be loaded");
   }
-
-  return data;
+  return data.sort((a, b) => (a.id > b.id ? 1 : -1));
 }
 
 export async function getMeme(id) {
@@ -18,13 +16,13 @@ export async function getMeme(id) {
     .select("*")
     .eq("id", id)
     .single();
-    
-    if (error) {
-      console.error(error);
-      throw new Error("Meme not found");
-    }
 
-  return data ;
+  if (error) {
+    console.error(error);
+    throw new Error("Meme not found");
+  }
+
+  return data;
 }
 
 export const createEditMeme = async (newMeme, id) => {

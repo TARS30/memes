@@ -39,7 +39,7 @@ const StyledSidebar = styled.aside`
     top: 0;
     left: -100%;
     width: 85%;
-    height: 100%;
+    min-height: 100vh;
     z-index: 10;
     justify-content: center;
     align-items: flex-end;
@@ -54,10 +54,9 @@ const StyledSidebar = styled.aside`
 const StyledDarkside = styled.div`
   display: none;
   top: 0;
-
   right: 0;
   width: 20%;
-  height: 100%;
+  min-height: 100%;
   position: absolute;
   background-color: #000000a0;
   transition: all 0.3s ease 0s;
@@ -89,7 +88,6 @@ export function menuClose() {
 }
 
 export default function Sidebar() {
-
   const memes = useMemes();
   const firstMemeId = memes.memes?.at(0).id;
 
